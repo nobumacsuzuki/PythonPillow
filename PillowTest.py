@@ -3,33 +3,12 @@ import numpy as np
 from matplotlib import pyplot as plt
 import cv2
 
-def PillowPractice1():
+def main():
     filename = 'lena_512x512.bmp'
     imageFromFile = Image.open(filename) # it generates the PIL.Image.Image object
+    imageFromFile.show()
+    input()
 
-    # use OpenCV as viewer
-    ndarrayImageColorRGB = np.array(imageFromFile) # if np.asarray, the array become immutable (cannot edit)
-    print(ndarrayImageColorRGB)
-    print(ndarrayImageColorRGB.dtype)
-    print(ndarrayImageColorRGB.shape)
-    ndarrayImageColorBGR = cv2.cvtColor(ndarrayImageColorRGB, cv2.COLOR_BGR2RGB) # convert RGB to BGR, cv2 takes BGR array
-    cv2.imshow('Color image RGB as BGR', ndarrayImageColorRGB)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-    cv2.imshow('Color image after BGR2RGB', ndarrayImageColorBGR)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-
-    # mask green and blue
-    #ndarrayImageColorRGB[:, :, 0] = 0
-    ndarrayImageColorRGB[:, :, 1] = 0
-    ndarrayImageColorRGB[:, :, 2] = 0
-
-    ndarrayImageColorBGR = cv2.cvtColor(ndarrayImageColorRGB, cv2.COLOR_BGR2RGB) # convert BGR to RGB
-    cv2.imshow('Color image', ndarrayImageColorBGR)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
 
     # manipulate R, G, B to set all to Y
     imageBuffer = Image.new('RGB', imageFromFile.size) # it generates the PIL.Image.Image object
@@ -41,18 +20,7 @@ def PillowPractice1():
             outG = Y
             outB = Y
             imageBuffer.putpixel((x_pos, y_pos), (outR, outG, outB)) # the cordinate is type, the pixel value is tuple
-
-    # use OpenCV as viewer
-    ndarrayImageYonly = np.array(imageBuffer)
-    print(ndarrayImageYonly)
-    print(ndarrayImageYonly.dtype)
-    print(ndarrayImageYonly.shape)
-    cv2.imshow('Y channel only',ndarrayImageYonly)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-def main():
-    PillowPractice1()
+    imageBuffer.show()
 
 if __name__ == "__main__":
     main()
