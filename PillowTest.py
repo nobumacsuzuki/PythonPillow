@@ -1,14 +1,10 @@
 from PIL import Image
-import numpy as np
-from matplotlib import pyplot as plt
-import cv2
 
 def main():
     filename = 'lena_512x512.bmp'
     imageFromFile = Image.open(filename) # it generates the PIL.Image.Image object
     imageFromFile.show()
     input()
-
 
     # manipulate R, G, B to set all to Y
     imageBuffer = Image.new('RGB', imageFromFile.size) # it generates the PIL.Image.Image object
